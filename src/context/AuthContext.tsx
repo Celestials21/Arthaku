@@ -9,6 +9,7 @@ interface AuthContextType {
   user: UserProfile | null;
   isAuthenticated: boolean;
   login: (username: string, pass: string) => boolean;
+  register: (username: string, pass: string, role: UserRole) => boolean;
   logout: () => void;
   role: UserRole;
   setRole: (role: UserRole) => void;
@@ -90,7 +91,35 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       localStorage.setItem('demo_auth', 'true');
       return true;
     }
+    // Jika kita mendaftarkan pengguna lokal baru, kita juga mengecek apakah ada di localstorage (fitur mock lanjutan)
+    // Untuk saat ini, kita beri pass karena demo mode akan login jika user sudah mendaftar (disimpan di session mock)
+    const mockUsers = JSON.parse(localStorage.getItem('demo_registered_users') || '[]');
+    const existing = mockUsers.find((u: any) => u.username === username && u.pass === pass);
+    if (existing) {
+      setIsAuthenticated(true);
+      setRole(existing.role);
+      localStorage.setItem('demo_auth', 'true');
+      return true;
+    }
+    
     return false;
+  };
+
+  const register = (username: string, pass: string, roleToSet: UserRole) => {
+    const mockUsers = JSON.parse(localStorage.getItem('demo_registered_users') || '[]');
+    // Cek duplikasi
+    if (mockUsers.find((u: any) => u.username === username)) {
+      return false; // username already exists
+    }
+    // Simpan mock user baru
+    mockUsers.push({ username, pass, role: roleToSet });
+    localStorage.setItem('demo_registered_users', JSON.stringify(mockUsers));
+    
+    // Auto login setelah register
+    setIsAuthenticated(true);
+    setRole(roleToSet);
+    localStorage.setItem('demo_auth', 'true');
+    return true;
   };
 
   const logout = () => {
@@ -166,6 +195,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       value={{
         isAuthenticated,
         login,
+        register,
         logout,
         user,
         role,

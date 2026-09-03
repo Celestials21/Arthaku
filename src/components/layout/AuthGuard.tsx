@@ -10,13 +10,13 @@ export const AuthGuard: React.FC<{ children: React.ReactNode }> = ({ children })
   const pathname = usePathname();
 
   useEffect(() => {
-    if (!isLoading && !isAuthenticated && pathname !== '/login') {
+    if (!isLoading && !isAuthenticated && pathname !== '/login' && pathname !== '/register') {
       router.push('/login');
     }
   }, [isAuthenticated, isLoading, pathname, router]);
 
-  // Allow rendering of login page without auth
-  if (pathname === '/login') {
+  // Allow rendering of auth pages without auth
+  if (pathname === '/login' || pathname === '/register') {
     return <>{children}</>;
   }
 

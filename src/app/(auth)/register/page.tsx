@@ -9,15 +9,19 @@ import { UserRole } from '@/lib/types';
 
 export default function RegisterPage() {
   const router = useRouter();
-  const { setRole } = useAuth();
+  const { register } = useAuth();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [selectedRole, setSelectedRole] = useState<UserRole>('user');
 
   const handleRegister = (e: React.FormEvent) => {
     e.preventDefault();
-    setRole(selectedRole);
-    router.push('/');
+    const success = register(email.toLowerCase(), password, selectedRole);
+    if (success) {
+      router.push('/');
+    } else {
+      alert('Username sudah digunakan! Silakan gunakan username lain.');
+    }
   };
 
   return (
