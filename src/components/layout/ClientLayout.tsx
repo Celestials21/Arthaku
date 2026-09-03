@@ -21,14 +21,31 @@ export const ClientLayout: React.FC<{ children: React.ReactNode }> = ({ children
 
   return (
     <AuthGuard>
-      <Navbar />
-      <div className="flex flex-1 max-w-7xl w-full mx-auto">
-        <Sidebar />
-        <main className="flex-1 p-4 sm:p-6 pb-24 md:pb-8 min-w-0">
-          {children}
-        </main>
+      <div 
+        className="min-h-screen flex flex-col relative"
+        style={{
+          // 👇 GANTI LINK GAMBAR DI BAWAH INI JIKA INGIN MENGUBAH BACKGROUND SENDIRI 👇
+          backgroundImage: 'url("https://images.unsplash.com/photo-1506744626753-1fa44df14dd4?auto=format&fit=crop&q=80&w=2000")',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundAttachment: 'fixed'
+        }}
+      >
+        {/* Overlay gelap agar teks/konten tetap mudah dibaca */}
+        <div className="absolute inset-0 bg-slate-950/80 backdrop-blur-sm z-0" />
+        
+        {/* Konten Dashboard (z-10 agar berada di atas background) */}
+        <div className="relative z-10 flex flex-col flex-1">
+          <Navbar />
+          <div className="flex flex-1 max-w-7xl w-full mx-auto">
+            <Sidebar />
+            <main className="flex-1 p-4 sm:p-6 pb-24 md:pb-8 min-w-0">
+              {children}
+            </main>
+          </div>
+          <BottomNav />
+        </div>
       </div>
-      <BottomNav />
     </AuthGuard>
   );
 };
