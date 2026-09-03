@@ -28,7 +28,7 @@ export default function RegisterPage() {
     <div 
       className="min-h-[80vh] flex items-center justify-center py-12 px-4 relative overflow-hidden"
       style={{
-        backgroundImage: 'url(""https://www.craiyon.com/pt/image/XE2-sCqIQIi6L5o5sKAKow"")',
+        backgroundImage: 'url("https://media.craiyon.com/2025-04-10/VYO2VVWIRbuXBo7c7qquSw.webp")',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
       }}
