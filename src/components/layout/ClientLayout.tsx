@@ -24,15 +24,15 @@ export const ClientLayout: React.FC<{ children: React.ReactNode }> = ({ children
       <div 
         className="min-h-screen flex flex-col relative"
         style={{
-          // 👇 GANTI LINK GAMBAR DI BAWAH INI JIKA INGIN MENGUBAH BACKGROUND SENDIRI 👇
-          backgroundImage: 'url("https://www.craiyon.com/pt/image/XE2-sCqIQIi6L5o5sKAKow")',
+          // 👇 PASTIKAN LINK BERAKHIRAN .jpg, .png, ATAU .webp (Direct Image Link) 👇
+          backgroundImage: 'url("https://images.unsplash.com/photo-1506744626753-1fa44df14dd4?auto=format&fit=crop&q=80&w=2000")',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundAttachment: 'fixed'
         }}
       >
-        {/* Overlay gelap agar teks/konten tetap mudah dibaca */}
-        <div className="absolute inset-0 bg-slate-950/80 backdrop-blur-sm z-0" />
+        {/* Overlay gelap agar teks/konten tetap mudah dibaca. Semakin kecil angkanya, semakin terang gambarnya */}
+        <div className="absolute inset-0 bg-slate-950/40 backdrop-blur-sm z-0" />
         
         {/* Konten Dashboard (z-10 agar berada di atas background) */}
         <div className="relative z-10 flex flex-col flex-1">
