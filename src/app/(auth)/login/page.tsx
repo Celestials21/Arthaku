@@ -26,13 +26,13 @@ export default function LoginPage() {
     <div 
       className="min-h-[80vh] flex items-center justify-center py-12 px-4 relative overflow-hidden"
       style={{
-        backgroundImage: 'url("https://www.craiyon.com/pt/image/XE2-sCqIQIi6L5o5sKAKow")',
+        backgroundImage: 'url("https://images.unsplash.com/photo-1506744626753-1fa44df14dd4?auto=format&fit=crop&q=80&w=2000")',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
       }}
     >
       {/* Overlay gradient untuk memastikan text tetap terbaca */}
-      <div className="absolute inset-0 bg-slate-950/60 backdrop-blur-[2px]" />
+      <div className="absolute inset-0 bg-slate-950/40 backdrop-blur-[2px]" />
 
       <div className="max-w-md w-full bg-slate-900/80 backdrop-blur-xl rounded-3xl p-8 border border-slate-700/50 shadow-2xl space-y-6 relative z-10">
         <div className="text-center space-y-2">
