@@ -25,7 +25,7 @@ export const ClientLayout: React.FC<{ children: React.ReactNode }> = ({ children
         className="min-h-screen flex flex-col relative"
         style={{
           // 👇 GANTI LINK GAMBAR DI BAWAH INI JIKA INGIN MENGUBAH BACKGROUND SENDIRI 👇
-          backgroundImage: 'url("https://images.unsplash.com/photo-1506744626753-1fa44df14dd4?auto=format&fit=crop&q=80&w=2000")',
+          backgroundImage: 'url("https://www.craiyon.com/pt/image/XE2-sCqIQIi6L5o5sKAKow")',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundAttachment: 'fixed'
