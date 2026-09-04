@@ -197,6 +197,11 @@ export const TransactionList: React.FC<TransactionListProps> = ({
                               {tx.category_name}
                             </span>
                           )}
+                          {role === 'admin' && tx.user_email && (
+                            <span className="text-[10px] bg-indigo-500/10 text-indigo-400 px-2 py-0.5 rounded-md font-medium border border-indigo-500/20">
+                              Oleh: {tx.user_email}
+                            </span>
+                          )}
                           {tx.is_reimbursable && (
                             <span className="text-[10px] bg-indigo-500/10 text-indigo-400 px-2 py-0.5 rounded-md font-medium border border-indigo-500/20">
                               Reimburse ke {tx.reimburse_to} ({tx.reimburse_amount ? formatIDR(tx.reimburse_amount) : formatIDR(tx.amount)})

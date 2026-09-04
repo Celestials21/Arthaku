@@ -12,9 +12,9 @@ export default function LoginPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleLogin = (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    const success = login(email.toLowerCase(), password);
+    const success = await login(email.trim().toLowerCase(), password);
     if (success) {
       router.push('/');
     } else {

@@ -12,11 +12,10 @@ export default function RegisterPage() {
   const { register } = useAuth();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [selectedRole, setSelectedRole] = useState<UserRole>('user');
 
-  const handleRegister = (e: React.FormEvent) => {
+  const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
-    const success = register(email.toLowerCase(), password, selectedRole);
+    const success = await register(email.trim().toLowerCase(), password, 'user');
     if (success) {
       router.push('/');
     } else {
@@ -46,18 +45,6 @@ export default function RegisterPage() {
         </div>
 
         <form onSubmit={handleRegister} className="space-y-4">
-          <div>
-            <label className="block text-xs font-semibold text-slate-300 mb-1">Pilih Peran Akun (Role)</label>
-            <select
-              value={selectedRole}
-              onChange={(e) => setSelectedRole(e.target.value as UserRole)}
-              className="w-full bg-slate-950/70 border border-slate-700/50 rounded-xl px-3 py-2.5 text-xs text-white focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 cursor-pointer transition-all"
-            >
-              <option value="user">User / Utama (Pencatat Biasa)</option>
-              <option value="admin">Admin (Akses Rekap & Manajemen)</option>
-            </select>
-          </div>
-
           <div>
             <label className="block text-xs font-semibold text-slate-300 mb-1">Username / Email</label>
             <div className="relative">
