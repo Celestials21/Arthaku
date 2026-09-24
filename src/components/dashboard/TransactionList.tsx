@@ -53,8 +53,9 @@ export const TransactionList: React.FC<TransactionListProps> = ({
     filtered = filtered.slice(0, limit);
   }
 
-  const handleDelete = (id: string, title: string) => {
-    if (confirm(`Apakah Anda yakin ingin menghapus transaksi "${title}"?`)) {
+  const handleDelete = (id: string, title: string, amount: number, type: string) => {
+    const actionText = type === 'expense' ? 'membalikkan saldo ke bank' : 'mengurangi saldo';
+    if (confirm(`Apakah Anda yakin ingin menghapus transaksi "${title}"? (Ini akan ${actionText})`)) {
       deleteTransaction(id);
     }
   };
@@ -165,7 +166,7 @@ export const TransactionList: React.FC<TransactionListProps> = ({
                 <th className="py-3 px-3">Barang / Deskripsi</th>
                 <th className="py-3 px-3">Tanggal</th>
                 <th className="py-3 px-3 text-right">Jumlah (Nominal)</th>
-                {role === 'admin' && <th className="py-3 px-3 text-center">Aksi (Admin)</th>}
+                <th className="py-3 px-3 text-center">Aksi</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-800/60 text-slate-200">
@@ -226,28 +227,26 @@ export const TransactionList: React.FC<TransactionListProps> = ({
                     </span>
                   </td>
 
-                  {role === 'admin' && (
-                    <td className="py-3.5 px-3 text-center whitespace-nowrap">
-                      <div className="flex items-center justify-center gap-1">
-                        {onEditTransaction && (
-                          <button
-                            onClick={() => onEditTransaction(tx)}
-                            title="Edit Transaksi"
-                            className="p-1.5 rounded-lg bg-indigo-500/10 text-indigo-400 hover:bg-indigo-500/20 transition-colors"
-                          >
-                            <Edit className="w-3.5 h-3.5" />
-                          </button>
-                        )}
+                  <td className="py-3.5 px-3 text-center whitespace-nowrap">
+                    <div className="flex items-center justify-center gap-1">
+                      {onEditTransaction && (
                         <button
-                          onClick={() => handleDelete(tx.id, tx.title)}
-                          title="Hapus Transaksi"
-                          className="p-1.5 rounded-lg bg-rose-500/10 text-rose-400 hover:bg-rose-500/20 transition-colors"
+                          onClick={() => onEditTransaction(tx)}
+                          title="Edit Transaksi"
+                          className="p-1.5 rounded-lg bg-indigo-500/10 text-indigo-400 hover:bg-indigo-500/20 transition-colors"
                         >
-                          <Trash2 className="w-3.5 h-3.5" />
+                          <Edit className="w-3.5 h-3.5" />
                         </button>
-                      </div>
-                    </td>
-                  )}
+                      )}
+                      <button
+                        onClick={() => handleDelete(tx.id, tx.title, tx.amount, tx.type)}
+                        title="Hapus Transaksi"
+                        className="p-1.5 rounded-lg bg-rose-500/10 text-rose-400 hover:bg-rose-500/20 transition-colors"
+                      >
+                        <Trash2 className="w-3.5 h-3.5" />
+                      </button>
+                    </div>
+                  </td>
                 </tr>
               ))}
             </tbody>

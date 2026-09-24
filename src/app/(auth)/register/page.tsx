@@ -18,8 +18,6 @@ export default function RegisterPage() {
     const success = await register(email.trim().toLowerCase(), password, 'user');
     if (success) {
       router.push('/');
-    } else {
-      alert('Username sudah digunakan! Silakan gunakan username lain.');
     }
   };
 

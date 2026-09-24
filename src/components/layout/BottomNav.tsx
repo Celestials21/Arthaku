@@ -4,7 +4,7 @@ import React from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useAuth } from '@/context/AuthContext';
-import { LayoutDashboard, PlusCircle, PieChart, Tags } from 'lucide-react';
+import { LayoutDashboard, PlusCircle, PieChart, Tags, Target } from 'lucide-react';
 
 export const BottomNav: React.FC = () => {
   const pathname = usePathname();
@@ -12,15 +12,21 @@ export const BottomNav: React.FC = () => {
 
   const navItems = [
     {
-      label: 'Beranda',
+      label: 'Input',
       href: '/',
+      icon: PlusCircle,
+      roles: ['user', 'admin'],
+    },
+    {
+      label: 'Beranda',
+      href: '/transactions',
       icon: LayoutDashboard,
       roles: ['user', 'admin'],
     },
     {
-      label: 'Input',
-      href: '/transactions',
-      icon: PlusCircle,
+      label: 'Target',
+      href: '/target',
+      icon: Target,
       roles: ['user', 'admin'],
     },
     {
@@ -40,7 +46,7 @@ export const BottomNav: React.FC = () => {
   const visibleItems = navItems.filter((item) => item.roles.includes(role));
 
   return (
-    <div className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-slate-900/95 backdrop-blur-lg border-t border-slate-800 px-2 py-2">
+    <div className="sticky bottom-0 w-full z-40 bg-slate-900/95 backdrop-blur-lg border-t border-slate-800 px-2 py-2">
       <nav className="flex items-center justify-around">
         {visibleItems.map((item) => {
           const isActive = pathname === item.href;
